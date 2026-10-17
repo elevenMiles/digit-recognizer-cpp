@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="neural_networks.vcxproj" Id="4dac32ff-87a2-4a09-a101-9deebad458ef" />
-</Solution>
