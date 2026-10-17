@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="digit_recognizer_neural_net.vcxproj" Id="d1ba7f59-8dae-4f31-b325-2efea50c842e" />
+</Solution>
