@@ -16,12 +16,12 @@ std::string getMessage(int index)
 {
     switch (index)
     {
-    case 0: return "No Python."; 
-    case 1: return "No TensorFlow.";
-    case 2: return "No NumPy.";
-    case 3: return "Just pure C++.";
-    case 4: return "Raw math.";
-    case 5: return "And a neural network built entirely from scratch.";
+    case 0: return "No Python"; 
+    case 1: return "No TensorFlow";
+    case 2: return "No NumPy";
+    case 3: return "Just pure C++";
+    case 4: return "Raw math";
+    case 5: return "And a neural network built entirely from scratch";
     }
 }
 
@@ -94,17 +94,18 @@ void trainWithDigits(NeuralNetwork& neuralNetwork, int epoch = 20)
 
     train_file.close();
 
-    // TRAINING TIMEEEE
+    // TRAINING TIMEEE!!
 
     for (int i = 0; i < epoch; ++i)
     {
-        std::cout << getMessage(i) << '\n';
+        std::cout << "Network Training -> " << (i + 1) << " of " << epoch << "  \033[32m[ " << getMessage(i) << " ]\033[0m\n";
         for (int j = 0; j < inputs_mat.size(); ++j)
         {
             neuralNetwork.train(inputs_mat[j], outputs_mat[outputs_digit[j]]);
         }
     }
-    std::cout << "NETWORK TRAINED.\n\n\n\n\n";
+
+    std::cout << "\033[2J\033[1;1H";
 }
 
 int testWithDigits(NeuralNetwork& neuralNetwork)
@@ -239,9 +240,9 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
 
         canvas.print();
 
-        std::cout << "Press \'X\' to exit.\n";
-        std::cout << "Press \'C\' to clear canvas.\n";
-        std::cout << "Press spacebar to see guess -> " << guess << '\n';
+        std::cout << " \033[36mCONTROLS:\033[0m [X] Exit | [D] Draw | [C] Clear | [Space] Result\n";
+        std::cout << "----------------------------------------\n\n";
+        std::cout << "\tYOU DRAW >> \033[32m" << guess << "\033[0m <<\n";
 
         canvas.fill(0);
 
@@ -252,6 +253,9 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
 
 int main()
 {
+    std::cout << "\033[36m\televen.cpp presents...\033[0m\n\n";
+    Sleep(3000);
+
     NeuralNetwork neuralNetwork{ 400, 100, 10, 0.3f };
     
     trainWithDigits(neuralNetwork, 6);
