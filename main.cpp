@@ -22,6 +22,25 @@ std::string getMessage(int index)
     case 3: return "Just pure C++";
     case 4: return "Raw math";
     case 5: return "And a neural network built entirely from scratch";
+    default: return "????";
+    }
+}
+
+std::string getDigitText(int digit)
+{
+    switch (digit)
+    {
+    case 0: return " ZERO";
+    case 1: return " ONE ";
+    case 2: return " TWO ";
+    case 3: return "THREE";
+    case 4: return " FOUR";
+    case 5: return " FIVE";
+    case 6: return " SIX ";
+    case 7: return "SEVEN";
+    case 8: return "EIGHT";
+    case 9: return " NINE";
+    default:return "     ";
     }
 }
 
@@ -190,7 +209,7 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
 
     bool wasSpaceDown = false;
 
-    int guess = 0;
+    int guess = -1;
 
     while (true)
     {
@@ -220,6 +239,7 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
         if (GetAsyncKeyState('C') & 0x8000)
         {
             digitBuffer.clear();
+            guess = -1;
         }
 
         if (GetAsyncKeyState(VK_SPACE) & 0x8000)
@@ -242,7 +262,7 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
 
         std::cout << " \033[36mCONTROLS:\033[0m [X] Exit | [D] Draw | [C] Clear | [Space] Result\n";
         std::cout << "----------------------------------------\n\n";
-        std::cout << "\tYOU DRAW >> \033[32m" << guess << "\033[0m <<\n";
+        std::cout << "\tYOU DRAW >> \033[32m" << getDigitText(guess) << "\033[0m <<\n";
 
         canvas.fill(0);
 
@@ -254,7 +274,6 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
 int main()
 {
     std::cout << "\033[36m\televen.cpp presents...\033[0m\n\n";
-    Sleep(3000);
 
     NeuralNetwork neuralNetwork{ 400, 100, 10, 0.3f };
     
