@@ -8,7 +8,7 @@ Train it, then draw a digit right in your terminal and watch the network guess w
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
 
-<!-- Add a screenshot or GIF of the canvas here, e.g.: ![demo](docs/demo.gif) -->
+![demo](media/digit_recognizer_neural_net.gif)
 
 ## Features
 
