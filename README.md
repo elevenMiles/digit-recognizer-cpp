@@ -107,18 +107,6 @@ The mouse acts as a relative "joystick": the system cursor is kept at the centre
 
 Tips for the best results: draw the digit large, roughly centred, and with a continuous stroke, the way the training digits look.
 
-## Results
-
-On the 100 bundled test images, with the default settings (400-100-10, learning rate 0.3, 6 epochs), the network scored **100 / 100 in each of 20 independent runs**, every run starting from fresh random weights.
-
-| Epochs | Mean test accuracy (20 runs) |
-|--------|------------------------------|
-| 1      | 97.3 %                       |
-| 3      | 99.9 %                       |
-| 6      | 100 %                        |
-
-The test set is small and drawn from the same distribution as the training set, so treat these numbers as a sanity check rather than a benchmark. Digits you draw by hand with a mouse will look a little different from the dataset, so expect real-world accuracy to be lower.
-
 ## Project structure
 
 ```
