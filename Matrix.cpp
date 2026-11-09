@@ -16,7 +16,8 @@ Matrix::Matrix(int rows, int cols)
 Matrix::Matrix(int rows, int cols, std::initializer_list<float> data)
 	: Matrix(rows, cols)
 {
-	assert(m_data.size() == data.size() && "Initializer list size does not match with Matrix data size");
+	assert(m_data.size() == data.size() 
+		&& "Matrix::Matrix(rows, cols, data) -> \"data\" size do not match with Matrix size.");
 	m_data.assign(data);
 }
 
@@ -34,25 +35,29 @@ std::string Matrix::shape() const
 
 float& Matrix::operator()(int row, int col)
 {
-	assert(row >= 0 && row < m_rows && col >= 0 && col < m_cols && "Matrix index out of range");
+	assert(row >= 0 && row < m_rows && col >= 0 && col < m_cols 
+		&& "Matrix::operator()(row, col) -> \"row\" or \"col\" out of range.");
 	return m_data[row * m_cols + col];
 }
 
 float Matrix::operator()(int row, int col) const
 {
-	assert(row >= 0 && row < m_rows && col >= 0 && col < m_cols && "Matrix index out of range");
+	assert(row >= 0 && row < m_rows && col >= 0 && col < m_cols 
+		&& "Matrix::operator()(row, col) -> \"row\" or \"col\" out of range.");
 	return m_data[row * m_cols + col];
 }
 
 float& Matrix::operator()(int index)
 {
-	assert(index >= 0 && index < m_data.size() && "List index out of range");
+	assert(index >= 0 && index < m_data.size() 
+		&& "Matrix::operator()(index) -> \"index\" out of range.");
 	return m_data[index];
 }
 
 float Matrix::operator()(int index) const
 {
-	assert(index >= 0 && index < m_data.size() && "List index out of range");
+	assert(index >= 0 && index < m_data.size() 
+		&& "Matrix::operator()(index) -> \"index\" out of range.");
 	return m_data[index];
 }
 
@@ -99,7 +104,8 @@ Matrix Matrix::zeros(int rows, int cols)
 
 Matrix Matrix::dot(const Matrix& A, const Matrix& B)
 {
-	assert(A.col_count() == B.row_count() && "operator* failed. Matrix dimensions does not match");
+	assert(A.col_count() == B.row_count() 
+		&& "Matrix::dot(A, B) -> column count of Matrix \"A\" must be equal to row count of Matrix \"B\"");
 
 	int Acol_Brow_Count{ A.col_count() };
 	int rows{ A.row_count() };
@@ -151,7 +157,8 @@ Matrix& Matrix::operator+=(float x)
 
 Matrix& Matrix::operator+=(const Matrix& M)
 {
-	assert((row_count() == M.row_count()) && (col_count() == M.col_count()) && "operator+= failed");
+	assert((row_count() == M.row_count()) && (col_count() == M.col_count()) 
+		&& "Matrix::operator+=(M) -> Dimensions of right operand Matrix(\"M\") must be equal to dimensions of left operand Matrix.");
 	for (int i{ 0 }; i < size(); ++i)
 	{
 		(*this)(i) += M(i);
@@ -174,7 +181,8 @@ Matrix& Matrix::operator-=(float x)
 
 Matrix& Matrix::operator-=(const Matrix& M)
 {
-	assert((row_count() == M.row_count()) && (col_count() == M.col_count()) && "operator-= failed");
+	assert((row_count() == M.row_count()) && (col_count() == M.col_count()) 
+		&& "Matrix::operator-=(M) -> Dimensions of right operand Matrix(\"M\") must be equal to dimensions of left operand Matrix.");
 	for (int i{ 0 }; i < size(); ++i)
 	{
 		(*this)(i) -= M(i);
@@ -215,7 +223,8 @@ Matrix operator+(float x, const Matrix& M)
 
 Matrix operator+(const Matrix& A, const Matrix& B)
 {
-	assert(A.row_count() == B.row_count() && A.col_count() == B.col_count() && "operator+ failed.");
+	assert(A.row_count() == B.row_count() && A.col_count() == B.col_count() 
+		&& "Matrix::operator+(A, B) -> Dimensions of Matrix(\"A\") must be equal to dimensions of Matrix(\"B\").");
 
 	Matrix OUT{ A.row_count(), A.col_count() };
 
@@ -255,7 +264,8 @@ Matrix operator-(float x, const Matrix& M)
 
 Matrix operator-(const Matrix& A, const Matrix& B)
 {
-	assert(A.row_count() == B.row_count() && A.col_count() == B.col_count() && "operator- failed.");
+	assert(A.row_count() == B.row_count() && A.col_count() == B.col_count() 
+		&& "Matrix::operator-(A, B) -> Dimensions of Matrix(\"A\") must be equal to dimensions of Matrix(\"B\").");
 
 	Matrix OUT{ A.row_count(), A.col_count() };
 
@@ -288,7 +298,8 @@ Matrix operator*(float s, const Matrix& M)
 
 Matrix operator*(const Matrix& A, const Matrix& B)
 {
-	assert(A.row_count() == B.row_count() && A.col_count() == B.col_count() && "operator* failed.");
+	assert(A.row_count() == B.row_count() && A.col_count() == B.col_count() 
+		&& "Matrix::operator*(A, B) -> Dimensions of Matrix(\"A\") must be equal to dimensions of Matrix(\"B\").");
 
 	Matrix OUT{ A.row_count(), A.col_count() };
 
