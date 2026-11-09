@@ -39,13 +39,13 @@ public:
 
 	int get(int x, int y)
 	{
-		assert(isInRange(x, y) && "DigitBuffer::get(x, y) -> x or y is out of range.");
+		assert(isInRange(x, y) && "DigitBuffer::get(x, y) -> \"x\" or \"y\" is out of range.");
 		return buffer[y * WIDTH + x];
 	}
 
 	int get(int index)
 	{
-		assert(index >= 0 && index < buffer.size() && "DigitBuffer::get(index) -> index is out of range.");
+		assert(index >= 0 && index < buffer.size() && "DigitBuffer::get(index) -> \"index\" is out of range.");
 		return buffer[index];
 	}
 
