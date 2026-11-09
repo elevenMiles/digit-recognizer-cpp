@@ -1,6 +1,6 @@
 # Digit Recognizer: a neural network from scratch in C++
 
-A handwritten-digit recognizer built with **no Python, no TensorFlow, no NumPy, and no ML libraries at all**. The matrix math, the neural network, the backpropagation, and even the drawing canvas are all written by hand in plain C++20.
+A handwritten-digit recognizer built with **no Python, no TensorFlow, no NumPy, and no ML libraries at all**. The matrix math, the neural network, the backpropagation, and even the drawing canvas are all written by hand in C++20.
 
 Train it, then draw a digit right in your terminal and watch the network guess what you drew.
 
