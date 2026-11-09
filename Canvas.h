@@ -46,7 +46,7 @@ public:
 
 	void drawBuffer(DigitBuffer<WIDTH, HEIGHT>& buffer)
 	{
-		assert(buffer.size() == data.size() && "Canvas::drawBuffer(buffer) -> buffer.size() is not equal to canvas.size()");
+		assert(buffer.size() == data.size() && "Canvas::drawBuffer(buffer) -> buffer.size() is not equal to Canvas size.");
 
 		for (int i = 0; i < data.size(); ++i)
 		{
