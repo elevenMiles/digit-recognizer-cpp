@@ -85,7 +85,7 @@ Each row is `label, p0, p1, ..., p399`: the digit (0 to 9) followed by 400 grays
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/<repo-name>.git
+   git clone https://github.com/elevenMiles/digit-recognizer-cpp.git
    ```
 2. Open `digit_recognizer_neural_net.slnx` in Visual Studio.
 3. The project is set to platform toolset `v145`. If your Visual Studio doesn't have it, right-click the project → **Properties** → **General** → **Platform Toolset** and pick the one you have installed.
