@@ -14,6 +14,7 @@ Train it, then draw a digit right in your terminal and watch the network guess w
 
 - **Custom `Matrix` class** with operator overloading, transpose, dot product, and element-wise ops. It is the only math tool the network uses.
 - **Feed-forward neural network** (input → hidden → output) trained with **backpropagation** and stochastic gradient descent.
+- **Xavier (Glorot) weight initialization** using a self-seeded Mersenne Twister.
 - **Interactive terminal canvas**: draw a digit with your mouse, press a key, and get a prediction.
 - **Fast to train**: the default 6 epochs take only a few seconds in a Release build, so you can play with it right away.
 - **Self-contained**: a small 20×20 digit dataset is included, with nothing to download.
@@ -28,7 +29,7 @@ Train it, then draw a digit right in your terminal and watch the network guess w
 | Hidden | 100  | Learns intermediate features of the strokes  |
 | Output | 10   | One neuron per digit, 0 to 9                 |
 
-Every neuron uses a **sigmoid** activation. The learning rate is `0.3`. Weights start as random values between −0.5 and 0.5. This network has no bias terms.
+Every neuron uses a **sigmoid** activation. The learning rate is `0.3`. Weights are initialized with **Xavier normal** initialization: random values drawn from a normal distribution with mean 0 and standard deviation `sqrt(2 / (n_in + n_out))`, where `n_in` and `n_out` are the sizes of the two layers a weight matrix connects. This network has no bias terms.
 
 The prediction is simply the output neuron with the highest activation.
 
@@ -67,7 +68,7 @@ Pixel values (0 to 255) are rescaled to the range **0.01 to 1.0**. Avoiding exac
 
 | File               | Images | Per digit |
 |--------------------|--------|-----------|
-| `digits_train.csv` | 1,040  | ~104      |
+| `digits_train.csv` | 1,041  | ~104      |
 | `digits_test.csv`  | 100    | 10        |
 
 Each row is `label, p0, p1, ..., p399`: the digit (0 to 9) followed by 400 grayscale pixel values (0 to 255) of a 20×20 image in row-major order.
@@ -76,8 +77,9 @@ Each row is `label, p0, p1, ..., p399`: the digit (0 to 9) followed by 400 grays
 
 ### Requirements
 
-- **Windows**: the interactive canvas uses the Win32 API (`GetAsyncKeyState`, `SetCursorPos`) for input.
-- **Visual Studio** with the C++ desktop workload and C++20 support.
+- **Windows**: the interactive canvas uses the Win32 API (`GetAsyncKeyState`, `GetCursorPos`, `SetCursorPos`) for input.
+- **Visual Studio** with the C++ desktop workload and C++20 support (the code uses `<format>` and `std::clamp`).
+- A terminal with ANSI escape code support (Windows Terminal or a recent console), since the canvas and colors rely on them.
 
 ### Build and run
 
@@ -112,12 +114,17 @@ Tips for the best results: draw the digit large, roughly centred, and with a con
 ```
 .
 ├── main.cpp                 # Data loading, training, testing, interactive canvas loop
+├── NeuralNetwork.h          # NeuralNetwork class declaration
 ├── NeuralNetwork.cpp        # Network: forward pass (query) and backpropagation (train)
-├── NeuralNetwok.h           # NeuralNetwork class declaration
 ├── Matrix.h / Matrix.cpp    # Hand-written linear algebra
+├── Random.h                 # Self-seeding Mersenne Twister and normal distribution helper
 ├── Canvas.h                 # ASCII renderer for the terminal canvas
 ├── DigitBuffer.h            # Drawing buffer, brush, and conversion to network input
 └── digits_dataset/
     ├── digits_train.csv
     └── digits_test.csv
 ```
+
+## Credits
+
+`Random.h` is based on the self-seeding Mersenne Twister from [learncpp.com](https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/), extended with a normal distribution helper used for weight initialization.
