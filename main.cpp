@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <algorithm> // for std::clamp
 
+#include <chrono>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -201,7 +202,7 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
     float cursor_posx{ canvas_size / 2.0f };
     float cursor_posy{ canvas_size / 2.0f };
 
-    float sensitivity{ 0.05f };
+    float sensitivity{ 5.0f };
 
     SetCursorPos(centerX, centerY);
 
@@ -211,8 +212,14 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
 
     int guess = -1;
 
+    auto previousTime{ std::chrono::high_resolution_clock::now() };
     while (true)
     {
+        auto currentTime{ std::chrono::high_resolution_clock::now() };
+        std::chrono::duration<float> deltaTimeDuration{ currentTime - previousTime };
+        previousTime = currentTime;
+        float deltaTime{ deltaTimeDuration.count() };
+
         if (GetAsyncKeyState('X') & 0x8000) break;
 
         GetCursorPos(&currentPos);
@@ -220,8 +227,8 @@ void playWithCanvas(NeuralNetwork& neuralNetwork)
         int deltaX = currentPos.x - centerX;
         int deltaY = currentPos.y - centerY;
 
-        cursor_posx += deltaX * sensitivity;
-        cursor_posy += deltaY * sensitivity;
+        cursor_posx += deltaX * sensitivity * deltaTime;
+        cursor_posy += deltaY * sensitivity * deltaTime;
 
         cursor_posx = std::clamp<float>(cursor_posx, 0.0f, canvas_size - 1.0f);
         cursor_posy = std::clamp<float>(cursor_posy, 0.0f, canvas_size - 1.0f);
